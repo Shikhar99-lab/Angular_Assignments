@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <form>
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" [(ngModel)]="resumeData.fullName" name="fullName">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="resumeData.email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="resumeData.phone" name="phone">
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" [(ngModel)]="resumeData.address" name="address"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea class="form-control" id="bio" [(ngModel)]="resumeData.bio" name="bio"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="birthDate" class="form-label">Birth Date</label>
+            <input type="date" class="form-control" id="birthDate" [(ngModel)]="resumeData.birthDate" name="birthDate">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Skills</label><br>
+            <div *ngFor="let skill of skillOptions">
+              <input type="checkbox" [value]="skill" (change)="onSkillChange(skill, $event)"> {{ skill }}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Education</label>
+            <div *ngFor="let edu of resumeData.education; let i = index">
+              <div class="mb-1">
+                <strong>{{ edu.institution }}</strong> - {{ edu.degree }} ({{ edu.year }})
+              </div>
+            </div>
+            <input type="text" class="form-control mb-1" placeholder="Institution" [(ngModel)]="newEducation.institution" name="newEducation.institution">
+            <input type="text" class="form-control mb-1" placeholder="Degree" [(ngModel)]="newEducation.degree" name="newEducation.degree">
+            <input type="text" class="form-control mb-1" placeholder="Year" [(ngModel)]="newEducation.year" name="newEducation.year">
+            <button type="button" class="btn btn-primary" (click)="addEducation()">Add Education</button>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Experience</label>
+            <div *ngFor="let exp of resumeData.experience; let i = index">
+              <div class="mb-1">
+                <strong>{{ exp.company }}</strong> - {{ exp.position }} ({{ exp.duration }})
+              </div>
+            </div>
+            <input type="text" class="form-control mb-1" placeholder="Company" [(ngModel)]="newExperience.company" name="newExperience.company">
+            <input type="text" class="form-control mb-1" placeholder="Position" [(ngModel)]="newExperience.position" name="newExperience.position">
+            <input type="text" class="form-control mb-1" placeholder="Duration" [(ngModel)]="newExperience.duration" name="newExperience.duration">
+            <button type="button" class="btn btn-primary" (click)="addExperience()">Add Experience</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h3>{{ resumeData.fullName }}</h3>
+        <p>Email: {{ resumeData.email }}</p>
+        <p>Phone: {{ resumeData.phone }}</p>
+        <p>Address: {{ resumeData.address }}</p>
+        <p>Bio: {{ resumeData.bio }}</p>
+        <p>Birth Date: {{ resumeData.birthDate }}</p>
+        <h4>Skills</h4>
+        <ul>
+          <li *ngFor="let skill of resumeData.skills">{{ skill }}</li>
+        </ul>
+        <h4>Education</h4>
+        <ul>
+          <li *ngFor="let edu of resumeData.education">
+            <strong>{{ edu.institution }}</strong> - {{ edu.degree }} ({{ edu.year }})
+          </li>
+        </ul>
+        <h4>Experience</h4>
+        <ul>
+          <li *ngFor="let exp of resumeData.experience">
+            <strong>{{ exp.company }}</strong> - {{ exp.position }} ({{ exp.duration }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Product Grid</h1>
+    <div class="mb-3 row">
+      <div class="col-md-6">
+        <label for="categorySelect" class="form-label">Filter by Category</label>
+        <select class="form-select" id="categorySelect" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+          <option value="all">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="sortOrderSelect" class="form-label">Sort by Price</label>
+        <select class="form-select" id="sortOrderSelect" [(ngModel)]="sortOrder" (change)="filterProducts()">
+          <option value="high-to-low">High to Low</option>
+          <option value="low-to-high">Low to High</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">Price: ${{ product.price }}</p>
+            <p class="card-text">Category: {{ product.category }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

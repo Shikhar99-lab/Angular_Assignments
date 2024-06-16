@@ -1,0 +1,13 @@
+<div class="conainer text-center m-5">
+    <div class="row">
+        <div class="col-4">
+            <app-addtask (add)="AddTask($event)"></app-addtask>
+            <!-- <app-pipes-example></app-pipes-example> -->
+        </div>
+        <div class="col-8">
+            @for (task of tasks; track task.id) {
+            <app-task-component [taskItem]="task" (hatao)="RemoveByID($event)"></app-task-component>
+            }
+        </div>
+    </div>
+</div>

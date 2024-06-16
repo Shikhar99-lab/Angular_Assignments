@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Cricketer Data Table</h1>
+        <div class="mb-3">
+          <label for="roleSelect" class="form-label">Filter by Role</label>
+          <select class="form-select" id="roleSelect">
+            <option value="all">All Roles</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <input class="form-control m-1" placeholder="Enter First Name" type="text" id="firstName">
+          <input class="form-control m-1" placeholder="Enter Last Name" type="text" id="lastName">
+          <input class="form-control m-1" placeholder="Enter Role" type="text" id="role">
+          <div class="input-group-append">
+            <button class="btn btn-primary m-1" type="button" onclick="addRole()">Add Cricketer</button>
+          </div>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="sortable" onclick="sortTable('firstName')">First Name <i class="bi bi-filter"></i></th>
+              <th scope="col" class="sortable" onclick="sortTable('lastName')">Last Name <i class="bi bi-filter"></i></th>
+              <th scope="col">Role</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider" id="tableData"></tbody>
+        </table>
+      </div>
+    
+      <script>
+        const data = [
+          { firstName: "Virat", lastName: "Kohli", role: "Batsman" },
+          { firstName: "MS", lastName: "Dhoni", role: "Captain" },
+          { firstName: "Sachin", lastName: "Tendulkar", role: "Batsman" },
+          { firstName: "Jasprit", lastName: "Bumrah", role: "Bowler" }
+        ];
+        let selectedRole = "all";
+        let sortOrder = {
+          firstName: true,
+          lastName: true
+        };
+    
+        function renderTable(filteredData) {
+          const tbody = document.getElementById('tableData');
+          tbody.innerHTML = '';
+    
+          filteredData.forEach(item => {
+            const row = `
+              <tr>
+                <td>${item.firstName}</td>
+                <td>${item.lastName}</td>
+                <td>${item.role}</td>
+                <td><button class="btn btn-sm btn-danger" onclick="removeItem(${data.indexOf(item)})">Remove</button></td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        }
+    
+        function fetchRoles() {
+          const roles = ["Batsman", "Captain", "Bowler"];
+          roles.forEach(role => {
+            const option = document.createElement('option');
+            option.value = role;
+            option.text = role;
+            document.getElementById('roleSelect').appendChild(option);
+          });
+        }
+    
+        function removeItem(index) {
+          data.splice(index, 1);
+          filterData();
+        }
+    
+        window.onload = () => {
+          fetchRoles();
+          renderTable(data);
+          document.getElementById('roleSelect').addEventListener('change', filterData);
+        };
+    
+        function filterData() {
+          selectedRole = document.getElementById('roleSelect').value;
+          let filteredData = data;
+          if (selectedRole !== "all") {
+            filteredData = data.filter(item => item.role === selectedRole);
+          }
+          renderTable(filteredData);
+        }
+    
+        function addRole() {
+          const firstName = document.getElementById('firstName').value;
+          const lastName = document.getElementById('lastName').value;
+          const role = document.getElementById('role').value;
+    
+          if (firstName && lastName && role) {
+            const newItem = { firstName, lastName, role };
+            data.push(newItem);
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('role').value = '';
+            filterData();
+          }
+        }
+    
+        function sortTable(key) {
+          sortOrder[key] = !sortOrder[key];
+          data.sort((a, b) => {
+            if (a[key] < b[key]) return sortOrder[key] ? -1 : 1;
+            if (a[key] > b[key]) return sortOrder[key] ? 1 : -1;
+            return 0;
+          });
+          filterData();
+        }
+      </script>
+    </script>
+</body>
+</html>
