@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../services/cart.service';
 
 interface Product {
   name: string;
@@ -28,6 +29,8 @@ export class ProductGridComponent implements OnInit {
   categories: string[] = ['Category 1', 'Category 2'];
   sortOrder = 'high-to-low';
 
+  constructor(private cartService: CartService) {}
+
   ngOnInit() {
     this.filterProducts();
   }
@@ -43,4 +46,9 @@ export class ProductGridComponent implements OnInit {
       this.filteredProducts.sort((a, b) => a.price - b.price);
     }
   }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+  }
+
 }

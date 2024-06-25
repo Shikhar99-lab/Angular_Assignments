@@ -1,5 +1,6 @@
 <div class="container mt-5">
     <h1 class="mb-4">Product Grid</h1>
+    <a routerLink="/cart" class="btn btn-secondary mb-4">Go to Cart</a>
     <div class="mb-3 row">
       <div class="col-md-6">
         <label for="categorySelect" class="form-label">Filter by Category</label>
@@ -24,6 +25,7 @@
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">Price: ${{ product.price }}</p>
             <p class="card-text">Category: {{ product.category }}</p>
+            <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
           </div>
         </div>
       </div>
