@@ -20,4 +20,12 @@ export class CartService {
   getCart() {
     return this.cart;
   }
+
+  removeFromCart(index: number): void {
+    this.cart.splice(index, 1);
+  }
+
+  updateCart(newCart: Product[]): void {
+    this.cart = newCart;
+  }
 }

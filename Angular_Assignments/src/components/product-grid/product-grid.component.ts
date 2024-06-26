@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CartPageComponent } from '../cart-page/cart-page.component';
 interface Product {
   name: string;
   price: number;
@@ -12,7 +13,7 @@ interface Product {
 @Component({
   selector: 'app-product-grid',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterOutlet, CartPageComponent],
   templateUrl: './product-grid.component.html',
   styleUrls: ['./product-grid.component.css']
 })

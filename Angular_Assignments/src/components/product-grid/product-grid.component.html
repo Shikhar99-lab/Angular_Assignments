@@ -1,34 +1,39 @@
 <div class="container mt-5">
-    <h1 class="mb-4">Product Grid</h1>
-    <a routerLink="/cart" class="btn btn-secondary mb-4">Go to Cart</a>
-    <div class="mb-3 row">
-      <div class="col-md-6">
-        <label for="categorySelect" class="form-label">Filter by Category</label>
-        <select class="form-select" id="categorySelect" [(ngModel)]="selectedCategory" (change)="filterProducts()">
-          <option value="all">All Categories</option>
-          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-        </select>
-      </div>
-      <div class="col-md-6">
-        <label for="sortOrderSelect" class="form-label">Sort by Price</label>
-        <select class="form-select" id="sortOrderSelect" [(ngModel)]="sortOrder" (change)="filterProducts()">
-          <option value="high-to-low">High to Low</option>
-          <option value="low-to-high">Low to High</option>
-        </select>
-      </div>
+  <h1 class="mb-4">Product Grid</h1>
+  <a type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse"
+    class="btn btn-primary mb-4">Show Cart</a>
+  <div class="collapse mb-2" id="collapse">
+    <div class="card card-body">
+      <app-cart-page></app-cart-page>
     </div>
-    
-    <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">Price: ${{ product.price }}</p>
-            <p class="card-text">Category: {{ product.category }}</p>
-            <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
-          </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-md-6">
+      <label for="categorySelect" class="form-label">Filter by Category</label>
+      <select class="form-select" id="categorySelect" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+        <option value="all">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="sortOrderSelect" class="form-label">Sort by Price</label>
+      <select class="form-select" id="sortOrderSelect" [(ngModel)]="sortOrder" (change)="filterProducts()">
+        <option value="high-to-low">High to Low</option>
+        <option value="low-to-high">Low to High</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">Price: ${{ product.price }}</p>
+          <p class="card-text">Category: {{ product.category }}</p>
+          <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
