@@ -1,11 +1,15 @@
-<div class="card m-2">
+<div class="card m-2 border-0 shadow">
     <div class="card-header d-flex justify-content-between">
         <h5 class="card-title">{{taskItem.desc}}</h5>
         <i class="bi bi-trash-fill" (click)="onRemove(taskItem.id)"></i>
     </div>
     <div class="card-body d-flex justify-content-between">
-        Priority : {{taskItem.priority}}<br>
+        Priority: {{taskItem.priority}}<br>
         <button type="button"
-            [ngClass]="taskItem.status == 'Completed'?('btn btn-success'):(taskItem.status == 'In Progress'?'btn btn-warning':(taskItem.status == 'Pending'?'btn btn-danger':'btn btn-primary'))">{{taskItem.status}}</button>
+            [ngClass]="taskItem.status == 'Completed' ? 'btn btn-success' : 
+                       taskItem.status == 'In Progress' ? 'btn btn-warning' : 
+                       taskItem.status == 'Pending' ? 'btn btn-danger' : 'btn btn-primary'">
+            {{taskItem.status}}
+        </button>
     </div>
 </div>

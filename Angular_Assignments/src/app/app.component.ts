@@ -13,4 +13,10 @@ import { ResumeFormComponent } from '../components/resume-form/resume-form.compo
 })
 export class AppComponent {
   title = 'Angular_Assignments';
+  scrollTo(section: string) {
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  }
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

@@ -1,6 +1,31 @@
-<app-task-list></app-task-list>
-<hr>
-<app-product-grid></app-product-grid>
-<hr>
-<app-resume-form></app-resume-form>
-<hr>
+<div class="container-fluid firstsecn">
+    <div class="row justify-content-center py-3">
+      <div class="col-4 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary shadow" (click)="scrollTo('taskList')">Task List</button>
+      </div>
+      <div class="col-4 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary shadow" (click)="scrollTo('productGrid')">Product Grid</button>
+      </div>
+      <div class="col-4 d-flex justify-content-center">
+        <button type="button" class="btn btn-primary shadow" (click)="scrollTo('resumeForm')">Resume Builder</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div id="taskList" class="py-3">
+    <app-task-list></app-task-list>
+  </div>
+  <hr>
+  <div id="productGrid" class="py-3">
+    <app-product-grid></app-product-grid>
+  </div>
+  <hr>
+  <div id="resumeForm" class="py-3">
+    <app-resume-form></app-resume-form>
+  </div>
+  <hr>
+
+  <button class="btn btn-primary scroll-to-top" (click)="scrollToTop()">
+    &#8679; <!-- Up arrow symbol -->
+  </button>
+  
